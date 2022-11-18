@@ -33,4 +33,13 @@ class MovieController extends Controller
         $movie->save();
         return redirect()->route('admin.movies.index');
     }
+
+    public function edit($id){
+        $movie = Movie::findOrFail($id);
+        return view('admin.movies.edit', compact(['movie']));
+    }
+
+    public function update(){
+        return redirect()->route('admin.movies.index');
+    }
 }

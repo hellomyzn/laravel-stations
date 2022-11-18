@@ -42,7 +42,7 @@ Route::group([
         ]
     ]);
     Route::post('movies/store', [AdminMovieController::class, 'store'])->name('store');
-    // Route::get('posts/edit/{id}', [PostController::class, 'edit'])->name('edit');
-    // Route::post('posts/edit',[PostController::class, 'update'])->name('update');
+    Route::get('movies/edit/{id}', [AdminMovieController::class, 'edit'])->name('edit');
+    Route::post('movies/edit',[AdminMovieController::class, 'update'])->name('update');
     // Route::post('posts/delete/{id}', [PostController::class, 'destroy'])->name('delete');
 });
