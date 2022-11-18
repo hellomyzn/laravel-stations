@@ -35,13 +35,13 @@ Route::group([
     'prefix' => 'admin'
 ],function(){
     Route::resource('movies', AdminMovieController::class, [
-        'only' => ['index', 'create', 'store'],
+        'only' => ['index', 'create'],
         'names' => [
             'index'=> 'index',
-            'create'=> 'create',
-            'store'=> 'store'
+            'create'=> 'create'
         ]
     ]);
+    Route::post('movies/store', [AdminMovieController::class, 'store'])->name('store');
     // Route::get('posts/edit/{id}', [PostController::class, 'edit'])->name('edit');
     // Route::post('posts/edit',[PostController::class, 'update'])->name('update');
     // Route::post('posts/delete/{id}', [PostController::class, 'destroy'])->name('delete');

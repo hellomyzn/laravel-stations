@@ -19,6 +19,15 @@
                 <label for="description">概要:</label><br>
                 <textarea class="form-control" name="description" id="description" rows="3"></textarea>
 
+                @if (count($errors) > 0)
+                <div>
+                    <ul>
+                        @foreach ($errors->all() as $error )
+                            <li>{{ $error }}</li>
+                        @endforeach
+                    </ul>
+                </div>
+                @endif
                 <div class="text-center mt-3">
                     <input class="btn btn-primary" type="submit" value="投稿する">
                     <input type="hidden" name="_token" value="{{csrf_token()}}">

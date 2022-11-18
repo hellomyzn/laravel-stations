@@ -3,9 +3,9 @@
 namespace App\Http\Controllers\admin;
 
 use App\Http\Controllers\Controller;
-use Illuminate\Http\Request;
+use App\Http\Requests\Admin\MovieRequest;
 use App\Models\Movie;
-
+use Illuminate\Http\Request;
 
 class MovieController extends Controller
 {
@@ -19,15 +19,9 @@ class MovieController extends Controller
         return view("admin.movies.create");
     }
 
-    public function store(Request $request){
+    public function store(MovieRequest $request){
         $movie = new Movie();
-        $movie->title = Movie::where('title', "=", $request->title)->first();
-        if($movie->title === null){
-            $movie->title = $request->title;
-        }else {
-            return redirect('admin/movies');
-        }
-        
+        $movie->title = $request->title;        
         $movie->image_url = $request->image_url;
         $movie->published_year = $request->published_year;
         if($request->is_showing){
@@ -36,10 +30,7 @@ class MovieController extends Controller
             $movie->is_showing = 0;
         }
         $movie->description = $request->description;
-
-        if($movie->title )
-        
         $movie->save();
-        return redirect('admin/movies');
+        return redirect()->route('admin.movies.index');
     }
 }
