@@ -29,6 +29,20 @@ Route::get('/getPractice', [PracticeController::class, 'getPractice']);
 
 Route::get('/movies', [MovieController::class, 'index']);
 
-Route::prefix('admin')->group(function(){
-    Route::get('/movies', [AdminMovieController::class, 'index']);
+
+Route::group([
+    'as' => 'admin.movies.',
+    'prefix' => 'admin'
+],function(){
+    Route::resource('movies', AdminMovieController::class, [
+        'only' => ['index', 'create', 'store'],
+        'names' => [
+            'index'=> 'index',
+            'create'=> 'create',
+            'store'=> 'store'
+        ]
+    ]);
+    // Route::get('posts/edit/{id}', [PostController::class, 'edit'])->name('edit');
+    // Route::post('posts/edit',[PostController::class, 'update'])->name('update');
+    // Route::post('posts/delete/{id}', [PostController::class, 'destroy'])->name('delete');
 });
