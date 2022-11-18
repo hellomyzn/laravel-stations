@@ -11,13 +11,13 @@
                 <input type="text" id="image_url" name="image_url"><br>
 
                 <label for="published_year">公開年:</label>
-                <input type="date" id="published_year" name="published_year"><br>
+                <input type="number" placeholder="YYYY" min="1999" max="2023" name="published_year"><br>
 
-                <input type="checkbox" id="is_showing" name="is_showing" value="">
+                <input type="checkbox" id="is_showing" name="is_showing" value=1>
                 <label for="is_showing"> 公開中</label><br>           
 
                 <label for="description">概要:</label><br>
-                <textarea class="form-control" name="body" id="description" rows="3"></textarea>
+                <textarea class="form-control" name="description" id="description" rows="3"></textarea>
 
                 <div class="text-center mt-3">
                     <input class="btn btn-primary" type="submit" value="投稿する">
