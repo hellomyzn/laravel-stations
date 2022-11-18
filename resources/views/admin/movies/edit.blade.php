@@ -1,8 +1,9 @@
 <div class="row">
     <!-- メイン -->
     <div class="col-10 col-md-6 offset-1 offset-md-3">
-        <form action={{ route('admin.movies.store',  ['id' => $movie->id]) }} method="post">
-            {{ csrf_field() }}
+        <form action={{ route('admin.movies.update',  ['id' => $movie->id]) }} method="post">
+            @csrf
+            @method('PATCH')
             <div class="form-group">
                 <label for="title">映画タイトル:</label><br>
                 <input type="text" id="title" name="title" value="{{ $movie->title }}"><br>
@@ -11,10 +12,10 @@
                 <input type="text" id="image_url" name="image_url" value="{{ $movie->image_url }}"><br>
 
                 <label for="published_year">公開年:</label>
-                <input type="number" placeholder="YYYY" min="1999" max="2023" name="published_year" value="{{ $movie->published_year }}"><br>
+                <input type="number" placeholder="YYYY" min="1900" max="2023" name="published_year" value="{{ $movie->published_year }}"><br>
 
                 <label for="is_showing"> 公開中</label>
-                <input type="checkbox" id="is_showing" name="is_showing" value=1 {{ $movie->is_showing == 1 ? 'checked' : ''}}><br>
+                <input type="checkbox" id="is_showing" name="is_showing" value=1 {{ $movie->is_showing == 1 ? 'checked' : ''}}> {{ $movie->is_showing == 1 ? '上映中' : '上映予定'}}<br>
 
                 <label for="description">概要:</label><br>
                 <textarea class="form-control" name="description" id="description" rows="3">{{ $movie->description }}</textarea>
@@ -29,6 +30,7 @@
                 </div>
                 @endif
                 <div class="text-center mt-3">
+                    <input name="movie_id" type="hidden" value="{{$movie->id}}" >
                     <input class="btn btn-primary" type="submit" value="投稿する">
                     <input type="hidden" name="_token" value="{{csrf_token()}}">
                 </div>

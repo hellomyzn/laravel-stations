@@ -139,9 +139,9 @@ class AdminMovieTest extends TestCase
         $data = [
             'title' => '修正後の映画',
             'image_url' => 'https://techbowl.co.jp/_nuxt/img/6074f78.png',
-            'published_year' => 2022,
+            'published_year' => 2020,
             'description' => '更新された概要',
-            'is_showing' => true
+            'is_showing' => 0
         ];
         $response = $this->patch('/admin/movies/'.$movie->id.'/update', $data);
         $response->assertStatus(302);
