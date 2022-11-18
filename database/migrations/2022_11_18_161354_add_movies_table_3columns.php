@@ -14,9 +14,9 @@ return new class extends Migration
     public function up()
     {
         Schema::table('movies', function (Blueprint $table) {
-            $table->integer('published_year')->comment('公開年');
+            $table->integer('published_year')->nullable()->comment('公開年');
             $table->tinyInteger('is_showing')->comment('上映中かどうか');
-            $table->text('description')->comment('概要');
+            $table->text('description')->nullable()->comment('概要');
         });
     }
 

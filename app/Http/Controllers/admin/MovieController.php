@@ -21,7 +21,13 @@ class MovieController extends Controller
 
     public function store(Request $request){
         $movie = new Movie();
-        $movie->title = $request->title;
+        $movie->title = Movie::where('title', "=", $request->title)->first();
+        if($movie->title === null){
+            $movie->title = $request->title;
+        }else {
+            return redirect('admin/movies');
+        }
+        
         $movie->image_url = $request->image_url;
         $movie->published_year = $request->published_year;
         if($request->is_showing){
@@ -30,6 +36,9 @@ class MovieController extends Controller
             $movie->is_showing = 0;
         }
         $movie->description = $request->description;
+
+        if($movie->title )
+        
         $movie->save();
         return redirect('admin/movies');
     }

@@ -15,8 +15,8 @@ return new class extends Migration
     {
         Schema::create('movies', function (Blueprint $table) {
             $table->id();
-            $table->text('title')->comment('映画タイトル');
-            $table->text('image_url')->comment('画像URL');
+            $table->string('title', 255)->unique()->comment('映画タイトル');
+            $table->text('image_url')->nullable()->comment('画像URL');
             $table->timestamps();
         });
     }
