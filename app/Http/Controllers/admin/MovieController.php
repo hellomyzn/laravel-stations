@@ -5,6 +5,7 @@ namespace App\Http\Controllers\admin;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\Admin\MovieCreateRequest;
 use App\Models\Movie;
+use App\Models\Schedule;
 use Illuminate\Http\Request;
 
 class MovieController extends Controller
@@ -13,6 +14,16 @@ class MovieController extends Controller
         $movies = Movie::all();
 
         return view("admin.movies.index", compact('movies'));
+    }
+
+    public function show($id){
+        $movie = Movie::findOrFail($id);
+        $schedules = $movie->schedules;
+        
+
+
+        
+        return view('admin.movies.show', compact('movie', 'schedules'));
     }
 
     public function create(){

@@ -9,7 +9,7 @@ use App\Models\Movie;
 class Schedule extends Model
 {
     use HasFactory;
-    protected $with = ['movies'];
+    // protected $with = ['movies'];
 
     public function movie(){
         return $this->belongsTo(Movie::class);

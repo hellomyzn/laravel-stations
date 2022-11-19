@@ -42,7 +42,7 @@
       <th>終了時刻</th>
       <th>機能</th>
     </tr>
-    
+    {{-- {{ dd($movie->schedules) }} --}}
     @foreach ($schedules as $schedule)
     <tr>
         <td>{{$schedule->start_time}}</td>

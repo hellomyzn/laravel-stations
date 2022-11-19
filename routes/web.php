@@ -4,6 +4,7 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\PracticeController;
 use App\Http\Controllers\MovieController;
 use App\Http\Controllers\SheetController;
+use App\Http\Controllers\ScheduleController;
 use App\Http\Controllers\admin\MovieController as AdminMovieController;
 /*
 |-------------------------------------------------------------------------
@@ -57,14 +58,23 @@ Route::group([
                 'create'=> 'create'
             ]
         ]);
+        Route::get('/{id}', [AdminMovieController::class, 'show'])->name('show');
         Route::post('store', [AdminMovieController::class, 'store'])->name('store');
         Route::get('{id}/edit', [AdminMovieController::class, 'edit'])->name('edit');
         Route::patch('{id}/update',[AdminMovieController::class, 'update'])->name('update');
         Route::delete('{id}/destroy', [AdminMovieController::class, 'destroy'])->name('delete');
     });
 
-    // Route::group([
-
-    // ]);
+    Route::group([
+        'as' => 'schedules.',
+        'prefix' => 'schedules'
+    ], function(){
+        Route::resource('', ScheduleController::class, [
+            'only' => ['index'],
+            'names' => [
+                'index'=> 'index'
+            ]
+        ]);
+    });
 
 });
