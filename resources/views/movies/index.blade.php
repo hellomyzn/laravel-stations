@@ -10,11 +10,17 @@
 <form action={{ route('movies.index') }} method="get">
     @csrf
     <div class="form-group">
-        <input type="text" placeholder="検索" name="keyword" value={{ $keyword }}>
-        <div class="text-center mt-3">
-            <button type="submit">検索</button>
-            <input type="hidden" name="_token" value="{{csrf_token()}}">
-        </div>
+        <input type="text" placeholder="検索" name="keyword" value={{ $keyword }}> <br>
+
+        <input type="radio" id="all" name="is_showing" value="">
+        <label for="all">すべて</label><br>
+        <input type="radio" id="pre_release" name="is_showing" value=0>
+        <label for="pre_release">公開予定</label><br>
+        <input type="radio" id="released" name="is_showing" value=1>
+        <label for="released">公開中</label> <br>
+
+        <button type="submit">検索</button>
+        <input type="hidden" name="_token" value="{{csrf_token()}}">
     </div>
 </form>
 <ul>
