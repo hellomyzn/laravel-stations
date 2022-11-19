@@ -27,8 +27,18 @@ Route::get('/practice3', [PracticeController::class, 'sample3']);
 
 Route::get('/getPractice', [PracticeController::class, 'getPractice']);
 
-
-Route::get('/movies', [MovieController::class, 'index'])->name('movies.index');
+Route::group([
+    'as' => 'movies.',
+    'prefix' => 'movies'
+], function(){
+    Route::resource('', MovieController::class, [
+        'only' => ['index'],
+        'names' => [
+            'index' => 'index',
+        ]
+    ]);
+    Route::get('/{id}', [MovieController::class, 'show'])->name('show');
+});
 
 Route::get('/sheets', [SheetController::class, 'index'])->name('sheets.index');
 
