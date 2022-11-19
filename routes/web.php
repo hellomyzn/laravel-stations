@@ -29,6 +29,7 @@ Route::get('/getPractice', [PracticeController::class, 'getPractice']);
 
 Route::get('/movies', [MovieController::class, 'index'])->name('movies.index');
 
+Route::get('/sheets', [MovieController::class, 'index'])->name('movies.index');
 
 Route::group([
     'as' => 'admin.movies.',
