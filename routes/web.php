@@ -43,18 +43,28 @@ Route::group([
 Route::get('/sheets', [SheetController::class, 'index'])->name('sheets.index');
 
 Route::group([
-    'as' => 'admin.movies.',
+    'as' => 'admin.',
     'prefix' => 'admin'
 ],function(){
-    Route::resource('movies', AdminMovieController::class, [
-        'only' => ['index', 'create'],
-        'names' => [
-            'index'=> 'index',
-            'create'=> 'create'
-        ]
-    ]);
-    Route::post('movies/store', [AdminMovieController::class, 'store'])->name('store');
-    Route::get('movies/{id}/edit', [AdminMovieController::class, 'edit'])->name('edit');
-    Route::patch('movies/{id}/update',[AdminMovieController::class, 'update'])->name('update');
-    Route::delete('movies/{id}/destroy', [AdminMovieController::class, 'destroy'])->name('delete');
+    Route::group([
+        'as' => 'movies.',
+        'prefix' => 'movies'
+    ], function(){
+        Route::resource('', AdminMovieController::class, [
+            'only' => ['index', 'create'],
+            'names' => [
+                'index'=> 'index',
+                'create'=> 'create'
+            ]
+        ]);
+        Route::post('store', [AdminMovieController::class, 'store'])->name('store');
+        Route::get('{id}/edit', [AdminMovieController::class, 'edit'])->name('edit');
+        Route::patch('{id}/update',[AdminMovieController::class, 'update'])->name('update');
+        Route::delete('{id}/destroy', [AdminMovieController::class, 'destroy'])->name('delete');
+    });
+
+    // Route::group([
+
+    // ]);
+
 });
