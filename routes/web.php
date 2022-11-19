@@ -3,6 +3,7 @@
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\PracticeController;
 use App\Http\Controllers\MovieController;
+use App\Http\Controllers\SheetController;
 use App\Http\Controllers\admin\MovieController as AdminMovieController;
 /*
 |-------------------------------------------------------------------------
@@ -29,7 +30,7 @@ Route::get('/getPractice', [PracticeController::class, 'getPractice']);
 
 Route::get('/movies', [MovieController::class, 'index'])->name('movies.index');
 
-Route::get('/sheets', [MovieController::class, 'index'])->name('movies.index');
+Route::get('/sheets', [SheetController::class, 'index'])->name('sheets.index');
 
 Route::group([
     'as' => 'admin.movies.',
