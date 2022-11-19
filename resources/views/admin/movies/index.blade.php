@@ -16,6 +16,7 @@
       <th>公開年</th>
       <th>上映中かどうか</th>
       <th>概要</th>
+      <th>機能</th>
     </tr>
     
     @foreach ($movies as $movie)
@@ -25,6 +26,13 @@
         <td>{{$movie->published_year}}</td>
         <td>{{$movie->is_showing == 0 ? '上映予定' : '上映中'}}</td>
         <td>{{$movie->description}}</td>
+        <td>
+          <form action={{route('admin.movies.delete', ['id' => $movie->id])}} method="POST">
+            @csrf
+            @method('DELETE')
+            <input type="submit" value="削除" class="btn btn-danger post_del_btn">
+          </form>
+        </td>
     </tr>
     @endforeach
     

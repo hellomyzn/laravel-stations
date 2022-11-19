@@ -54,4 +54,10 @@ class MovieController extends Controller
         $movie->save();
         return redirect()->route('admin.movies.index');
     }
+
+    public function destroy(Request $request, $id){
+        $movie = Movie::findOrFail($id);
+        $movie->delete();
+        return redirect()->route('admin.movies.index');
+    }
 }
