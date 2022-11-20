@@ -63,6 +63,9 @@ Route::group([
         Route::get('{id}/edit', [AdminMovieController::class, 'edit'])->name('edit');
         Route::patch('{id}/update',[AdminMovieController::class, 'update'])->name('update');
         Route::delete('{id}/destroy', [AdminMovieController::class, 'destroy'])->name('delete');
+
+        Route::get('{id}/schedules/create', [AdminMovieController::class, 'create_schedule'])->name('schedule.create');
+        Route::post('{id}/schedules/store', [AdminMovieController::class, 'store_schedule'])->name('schedule.store');
     });
 
     Route::group([
