@@ -4,6 +4,7 @@ namespace App\Http\Controllers\admin;
 
 use App\Http\Controllers\Controller;
 use App\Http\Requests\Admin\MovieCreateRequest;
+use App\Http\Requests\Admin\ScheduleRequest;
 use App\Models\Movie;
 use App\Models\Schedule;
 use Illuminate\Http\Request;
@@ -72,7 +73,8 @@ class MovieController extends Controller
         $schedules = $movie->schedules;
         return view('admin.movies.schedules.create', compact(['movie', 'schedules']));
     }
-    public function store_schedule(Request $request, $id){
+    public function store_schedule(ScheduleRequest $request, $id){
+        
         $schedule = new Schedule();
         $schedule->movie_id = $id;
         $schedule->start_time = $request->input('start_time_date') . " " . $request->input('start_time_time');

@@ -62,6 +62,7 @@
             <div class="text-center mt-3">
                 <input class="btn btn-primary" type="submit" value="投稿する">
                 <input type="hidden" name="_token" value="{{csrf_token()}}">
+                <input type="hidden" name="movie_id" value={{$movie->id}}>
             </div>
         </div>
     </form>
