@@ -78,6 +78,9 @@ Route::group([
                 'index'=> 'index'
             ]
         ]);
+        Route::get('/{id}/edit', [ScheduleController::class, 'edit'])->name('edit');
+        Route::patch('/{id}/update',[ScheduleController::class, 'update'])->name('update');
+        Route::delete('{id}/destroy', [ScheduleController::class, 'destroy'])->name('delete');
     });
 
 });
