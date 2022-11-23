@@ -7,6 +7,7 @@ use App\Http\Controllers\SheetController;
 use App\Http\Controllers\ScheduleController;
 use App\Http\Controllers\ReservationController;
 use App\Http\Controllers\admin\MovieController as AdminMovieController;
+use App\Http\Controllers\admin\ReservationController as AdminReservationController;
 /*
 |-------------------------------------------------------------------------
 | Web Routes
@@ -49,6 +50,9 @@ Route::get('/sheets', [SheetController::class, 'index'])->name('sheets.index');
 
 Route::post('/reservations/store', [ReservationController::class, 'store'])->name('reservations.store');
 
+
+
+
 Route::group([
     'as' => 'admin.',
     'prefix' => 'admin'
@@ -80,13 +84,22 @@ Route::group([
     ], function(){
         Route::resource('', ScheduleController::class, [
             'only' => ['index'],
-            'names' => [
-                'index'=> 'index'
-            ]
+            'names' => ['index'=> 'index']
         ]);
         Route::get('/{id}/edit', [ScheduleController::class, 'edit'])->name('edit');
         Route::patch('/{id}/update',[ScheduleController::class, 'update'])->name('update');
         Route::delete('{id}/destroy', [ScheduleController::class, 'destroy'])->name('delete');
+    });
+
+    Route::group([
+        'as' => 'reservations.',
+        'prefix' => 'reservations'
+    ], function(){
+        Route::resource('', AdminReservationController::class, [
+            'only' => ['index', 'create'],
+            'name' => ['index' => 'index', 'create' => 'create']
+        ]);
+        
     });
 
 });

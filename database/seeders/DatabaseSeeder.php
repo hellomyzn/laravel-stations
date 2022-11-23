@@ -5,6 +5,7 @@ namespace Database\Seeders;
 use App\Models\Practice;
 use App\Models\Movie;
 use App\Models\Schedule;
+use App\Models\Reservation;
 use Database\Seeders\SheetTableSeeder;
 use Illuminate\Database\Seeder;
 
@@ -24,6 +25,7 @@ class DatabaseSeeder extends Seeder
         $this->call([
             SheetTableSeeder::class
         ]);
+        Reservation::factory(10)->create();
         
     }
 }
