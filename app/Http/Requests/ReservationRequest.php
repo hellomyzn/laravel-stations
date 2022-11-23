@@ -25,7 +25,11 @@ class ReservationRequest extends FormRequest
     {
         return [
             'name' => 'required',
-            'email' => 'email|required'
+            'email' => 'email|required',
+            'schedule_id' => 'required',
+            'sheet_id' => 'required',
+            'screening_date' => 'required'
+
         ];
     }
 }

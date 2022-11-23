@@ -35,15 +35,16 @@ class ReservationController extends Controller
         $reservation->sheet_id = $request->sheet_id;
         $reservation->email = $request->input('email');
         $reservation->name = $request->input('name');
+
+        $schedule = Schedule::findOrFail($request->schedule_id);
+        $movie_id = $schedule->movie->id;
+
         try {
             $reservation->save();
           } catch (\Exception $e) {
 
-            return abort(400, $e->getMessage());
+            return abort(302, $e->getMessage());
           }
-        
-
-        $movie_id = $request->movie_id;
         
         return redirect()
             ->route('movies.show', ['id' => $movie_id ])
