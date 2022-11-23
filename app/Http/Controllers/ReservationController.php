@@ -28,6 +28,11 @@ class ReservationController extends Controller
     }
 
     public function store(ReservationRequest $request){
-        return "hoge";
+        
+        $movie_id = $request->movie_id;
+        
+        return redirect()
+            ->route('movies.show', ['id' => $movie_id ])
+            ->with('successMessage', '予約が完了しました');
     }
 }
