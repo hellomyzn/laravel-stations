@@ -27,7 +27,7 @@ class DatabaseSeeder extends Seeder
         $this->call([
             SheetTableSeeder::class
         ]);
-        // Reservation::factory(10)->create();
+        Reservation::factory(10)->create();
         
     }
 }
