@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\Movie;
+use App\Models\Sheet;
 
 class MovieController extends Controller
 {
@@ -30,14 +31,19 @@ class MovieController extends Controller
     public function show($id){
         $movie = Movie::findOrFail($id);
         $schedules = $movie->schedules;
-
         
         return view('movies.show', compact(['movie', 'schedules']));
     }
 
 
     public function show_sheets(Request $request, $id, $schedule_id){
+        if(is_null($request->screening_date)){
+            return abort(400, "Exception message");
+        }
         
-        return view('movies.show_sheets', compact(['id', 'schedule_id', 'screening_date']));
+        $screening_date = $request->screening_date;
+        $sheets = Sheet::all();
+
+        return view('movies.show_sheets', compact(['id', 'schedule_id', 'screening_date', 'sheets']));
     }
 }

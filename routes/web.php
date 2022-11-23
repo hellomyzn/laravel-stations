@@ -5,6 +5,7 @@ use App\Http\Controllers\PracticeController;
 use App\Http\Controllers\MovieController;
 use App\Http\Controllers\SheetController;
 use App\Http\Controllers\ScheduleController;
+use App\Http\Controllers\ReservationController;
 use App\Http\Controllers\admin\MovieController as AdminMovieController;
 /*
 |-------------------------------------------------------------------------
@@ -41,6 +42,7 @@ Route::group([
     ]);
     Route::get('/{id}', [MovieController::class, 'show'])->name('show');
     Route::get('/{id}/schedules/{schedule_id}/sheets', [MovieController::class, 'show_sheets'])->name('show.sheets');
+    Route::get('/{id}/schedules/{schedule_id}/reservations/create', [ReservationController::class, 'create'])->name('reservations.create');
 });
 
 Route::get('/sheets', [SheetController::class, 'index'])->name('sheets.index');
