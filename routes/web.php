@@ -102,6 +102,9 @@ Route::group([
         ]);
         Route::get('/{id}', [AdminReservationController::class, 'show'])->name('show');
         Route::post('store', [AdminReservationController::class, 'store'])->name('store');
+        Route::get('{id}/edit', [AdminReservationController::class, 'edit'])->name('edit');
+        Route::patch('{id}',[AdminReservationController::class, 'update'])->name('update');
+        Route::delete('{id}', [AdminReservationController::class, 'destroy'])->name('delete');
     });
 
 });

@@ -39,7 +39,6 @@ class ReservationController extends Controller
     public function store(ReservationRequest $request){
         $reservation = new Reservation();
         $reservation->screening_date = $request->input('screening_date');
-        // $reservation->movie_id = $request->input('movie_id');
         $reservation->schedule_id = $request->input('schedule_id');
         $reservation->sheet_id = $request->input('sheet_id');
         $reservation->name = $request->input('name');
@@ -58,6 +57,48 @@ class ReservationController extends Controller
     public function show($id){
         $reservation = Reservation::findOrFail($id);
 
-        return view('admin.reservation.show');
+        return view('admin.reservations.show', compact(['reservation']));
+    }
+
+    public function edit($id){
+        $reservation = Reservation::findOrFail($id);
+        $movies = Movie::all();
+        $sheets = Sheet::all();
+        $schedules = Schedule::all();
+
+        return view('admin.reservations.edit', compact([
+            'reservation',
+            'movies',
+            'sheets',
+            'schedules'
+        ]));
+    }
+
+    public function update(ReservationRequest $request, $id){
+        $reservation = Reservation::findOrFail($id);
+        $reservation->screening_date = $request->input('screening_date');
+        $reservation->schedule_id = $request->input('schedule_id');
+        $reservation->sheet_id = $request->input('sheet_id');
+        $reservation->name = $request->input('name');
+        $reservation->email = $request->input('email');
+
+        try {
+            $reservation->save();
+          } catch (\Exception $e) {
+
+            return abort(302, $e->getMessage());
+          }
+        return redirect()->route('admin.reservations.show', ['id' => $id]);
+    }
+
+    public function destroy($id){
+        $reservation = Reservation::findOrFail($id);
+        try {
+            $reservation->delete();
+          } catch (\Exception $e) {
+
+            return abort(404, $e->getMessage());
+          }
+        return redirect()->route('admin.reservations.index');
     }
 }
