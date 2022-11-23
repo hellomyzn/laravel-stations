@@ -13,7 +13,7 @@ return new class extends Migration
      */
     public function up()
     {
-        Schema::create('reservation', function (Blueprint $table) {
+        Schema::create('reservations', function (Blueprint $table) {
             $table->unsignedBigInteger('id')->autoIncrement();
             $table->date('screening_date');
             $table->foreignId('schedule_id')->constrained('schedules')->cascadeOnDelete()->nullable();
@@ -21,6 +21,10 @@ return new class extends Migration
             $table->string('email');
             $table->string('name');
             $table->timestamps();
+
+            $table->unique(['schedule_id', 'sheet_id']);
+
+
         });
     }
 
@@ -31,6 +35,6 @@ return new class extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('reservation');
+        Schema::dropIfExists('reservations');
     }
 };

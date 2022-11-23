@@ -28,8 +28,9 @@
             <input class="btn btn-primary" type="submit" value="予約する">
             <input type="hidden" name="_token" value="{{csrf_token()}}">
             <input type="hidden" name="movie_id" value="{{ $movie->id }}">
-            <input type="hidden" name="schedule" value="{{ $schedule }}">
-            <input type="hidden" name="schedule" value="{{ $sheet }}">
+            <input type="hidden" name="schedule_id" value="{{ $schedule->id }}">
+            <input type="hidden" name="screening_date" value="{{ $screening_date }}">
+            <input type="hidden" name="sheet_id" value="{{ $sheet->id }}">
             
         </div>
     </div>

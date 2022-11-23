@@ -7,6 +7,7 @@ use App\Http\Requests\ReservationRequest;
 use App\Models\Movie;
 use App\Models\Schedule;
 use App\Models\Sheet;
+use App\Models\Reservation;
 
 class ReservationController extends Controller
 {   
@@ -28,7 +29,20 @@ class ReservationController extends Controller
     }
 
     public function store(ReservationRequest $request){
+        $reservation = new Reservation();
+        $reservation->screening_date = $request->screening_date;
+        $reservation->schedule_id = $request->schedule_id;
+        $reservation->sheet_id = $request->sheet_id;
+        $reservation->email = $request->input('email');
+        $reservation->name = $request->input('name');
+        try {
+            $reservation->save();
+          } catch (\Exception $e) {
+
+            return abort(400, $e->getMessage());
+          }
         
+
         $movie_id = $request->movie_id;
         
         return redirect()
