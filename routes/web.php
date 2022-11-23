@@ -97,9 +97,11 @@ Route::group([
     ], function(){
         Route::resource('', AdminReservationController::class, [
             'only' => ['index', 'create'],
-            'name' => ['index' => 'index', 'create' => 'create']
+            'name' => ['index' => 'index', 
+                    'create' => 'create']
         ]);
-        
+        Route::get('/{id}', [AdminReservationController::class, 'show'])->name('show');
+        Route::post('store', [AdminReservationController::class, 'store'])->name('store');
     });
 
 });

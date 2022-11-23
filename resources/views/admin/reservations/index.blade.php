@@ -25,3 +25,5 @@
     @endforeach
     
   </table>
+
+  <a href="{{ route('admin.reservations.create')}}">Create</a>
