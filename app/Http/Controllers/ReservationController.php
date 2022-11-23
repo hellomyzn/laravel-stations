@@ -25,11 +25,6 @@ class ReservationController extends Controller
         if(!is_null($existed_reservation->first())){
             return abort(400, "Exception message");
         }
-
-        // if(!empty(Reservation::where('schedule_id', '=', $schedule->id)) && !empty(Reservation::where('sheet_id', '=', $sheet->id))){
-        //     dd("hoge");
-        // }
-        
         return view('movies.reservation.create', compact([
             'movie',
             'schedule',
