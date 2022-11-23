@@ -20,7 +20,16 @@ class ReservationController extends Controller
         $schedule = Schedule::findOrFail($schedule_id);
         $screening_date = $request->screening_date;
         $sheet = Sheet::findOrFail($request->sheetId);
+        
+        $existed_reservation = Reservation::where('schedule_id', '=', $schedule->id)->where('sheet_id', '=', $sheet->id)->get();
+        if(!is_null($existed_reservation->first())){
+            return abort(400, "Exception message");
+        }
 
+        // if(!empty(Reservation::where('schedule_id', '=', $schedule->id)) && !empty(Reservation::where('sheet_id', '=', $sheet->id))){
+        //     dd("hoge");
+        // }
+        
         return view('movies.reservation.create', compact([
             'movie',
             'schedule',
@@ -38,6 +47,8 @@ class ReservationController extends Controller
 
         $schedule = Schedule::findOrFail($request->schedule_id);
         $movie_id = $schedule->movie->id;
+
+
 
         try {
             $reservation->save();

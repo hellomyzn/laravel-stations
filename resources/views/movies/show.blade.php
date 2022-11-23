@@ -48,8 +48,8 @@
     <tr>
       <p>{{explode(" ",$schedule->start_time)[0]}}</p>
 
-      <td>{{ $schedule->start_time->format('h:m') }}</td>
-      <td>{{ $schedule->end_time->format('h:m') }}</td>
+      <td>{{ $schedule->start_time->format('h:i') }}</td>
+      <td>{{ $schedule->end_time->format('h:i') }}</td>
       <td>
         <form action={{route('movies.show.sheets', ['id' => $movie->id, 'schedule_id' => $schedule->id])}} method="GET">
           @csrf

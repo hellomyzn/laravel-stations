@@ -44,6 +44,10 @@ class ReservationController extends Controller
         $reservation->name = $request->input('name');
         $reservation->email = $request->input('email');
 
+        // if (!is_null(Reservation::where('schedule_id', '=', $reservation->schedule_id)) && !is_null(Reservation::where('sheet_id', '=', $reservation->sheet_id))){
+        //     return abort(400, $e->getMessage());
+        // }
+
         try {
             $reservation->save();
           } catch (\Exception $e) {

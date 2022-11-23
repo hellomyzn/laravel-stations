@@ -71,7 +71,7 @@ class MovieController extends Controller
     public function create_schedule($id){
         $movie = Movie::findOrFail($id);
         $schedules = $movie->schedules;
-        return view('admin.movies.schedules.create', compact(['movie', 'schedules']));
+        return view('admin.schedules.create', compact(['movie', 'schedules']));
     }
     public function store_schedule(ScheduleRequest $request, $id){
         
