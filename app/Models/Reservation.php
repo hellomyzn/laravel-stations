@@ -17,6 +17,6 @@ class Reservation extends Model
     }
 
     public function sheet(){
-        return $this->hasOne(Sheet::class);
+        return $this->belongsTo(Sheet::class);
     }
 }
