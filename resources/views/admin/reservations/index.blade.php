@@ -10,7 +10,7 @@
     @foreach ($reservations as $reservation)
     <tr>
         <td>{{$reservation->schedule->movie->title}}</td>
-        <td>{{$reservation->sheet->row . $reservation->sheet->column}}</td>
+        <td>{{ strtoupper($reservation->sheet->row . $reservation->sheet->column) }}</td>
         <td>{{$reservation->screening_date}}</td>
         <td>{{$reservation->name }}</td>
         <td>{{$reservation->email}}</td>
