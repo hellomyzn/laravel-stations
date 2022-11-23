@@ -25,10 +25,19 @@ class MovieController extends Controller
 
         return view("movies.index", compact(['movies','keyword']));
     }
+    
 
     public function show($id){
         $movie = Movie::findOrFail($id);
-        $schedules = $movie->schedules();
+        $schedules = $movie->schedules;
+
+        
         return view('movies.show', compact(['movie', 'schedules']));
+    }
+
+
+    public function show_sheets(Request $request, $id, $schedule_id){
+        
+        return view('movies.show_sheets', compact(['id', 'schedule_id', 'screening_date']));
     }
 }

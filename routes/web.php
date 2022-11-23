@@ -28,6 +28,7 @@ Route::get('/practice3', [PracticeController::class, 'sample3']);
 
 Route::get('/getPractice', [PracticeController::class, 'getPractice']);
 
+
 Route::group([
     'as' => 'movies.',
     'prefix' => 'movies'
@@ -39,9 +40,11 @@ Route::group([
         ]
     ]);
     Route::get('/{id}', [MovieController::class, 'show'])->name('show');
+    Route::get('/{id}/schedules/{schedule_id}/sheets', [MovieController::class, 'show_sheets'])->name('show.sheets');
 });
 
 Route::get('/sheets', [SheetController::class, 'index'])->name('sheets.index');
+
 
 Route::group([
     'as' => 'admin.',

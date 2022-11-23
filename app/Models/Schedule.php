@@ -10,6 +10,11 @@ class Schedule extends Model
 {
     use HasFactory;
     // protected $with = ['movies'];
+    
+    protected $dates = [
+        'start_time', 
+        'end_time'
+    ];
 
     public function movie(){
         return $this->belongsTo(Movie::class);
