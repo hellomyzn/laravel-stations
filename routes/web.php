@@ -47,6 +47,7 @@ Route::group([
 
 Route::get('/sheets', [SheetController::class, 'index'])->name('sheets.index');
 
+Route::post('/reservations/store', [ReservationController::class, 'store'])->name('reservations.store');
 
 Route::group([
     'as' => 'admin.',

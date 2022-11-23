@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use App\Http\Requests\ReservationRequest;
 use App\Models\Movie;
 use App\Models\Schedule;
 use App\Models\Sheet;
@@ -19,13 +20,14 @@ class ReservationController extends Controller
         $screening_date = $request->screening_date;
         $sheet = Sheet::findOrFail($request->sheetId);
 
-        
-
-        // dd($request->sheet_id);
         return view('movies.reservation.create', compact([
             'movie',
             'schedule',
             'screening_date',
             'sheet']));
+    }
+
+    public function store(ReservationRequest $request){
+        return "hoge";
     }
 }

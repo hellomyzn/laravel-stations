@@ -1,4 +1,4 @@
-<form action={{ route('admin.movies.store') }} method="post">
+<form action={{ route('reservations.store') }} method="post">
     {{ csrf_field() }}
     <div class="form-group">
         <p>映画作品: {{ $movie->title }}</p>
