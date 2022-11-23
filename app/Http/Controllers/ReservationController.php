@@ -3,6 +3,9 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use App\Models\Movie;
+use App\Models\Schedule;
+use App\Models\Sheet;
 
 class ReservationController extends Controller
 {   
@@ -11,16 +14,18 @@ class ReservationController extends Controller
             return abort(400, "Exception message");
         }
 
-        $movie_id = $id;
+        $movie = Movie::findOrFail($id);
+        $schedule = Schedule::findOrFail($schedule_id);
         $screening_date = $request->screening_date;
-        $sheet_id = $request->sheetId;
+        $sheet = Sheet::findOrFail($request->sheetId);
 
         
 
         // dd($request->sheet_id);
         return view('movies.reservation.create', compact([
-            'movie_id',
+            'movie',
+            'schedule',
             'screening_date',
-            'sheet_id']));
+            'sheet']));
     }
 }
