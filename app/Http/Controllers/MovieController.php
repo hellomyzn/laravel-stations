@@ -14,14 +14,18 @@ class MovieController extends Controller
         $is_showing = $request->input('is_showing');
 
         $query = Movie::query();
-        $query->when(!is_null($keyword), function($query) use ($keyword){
-            return $query->where('title', 'LIKE', "%{$keyword}%")
+        if(!is_null($keyword) && !is_null($is_showing)){
+            $query->where('title', 'LIKE', "%{$keyword}%")
+                ->where('is_showing', $is_showing)
+                ->orWhere('description', 'LIKE', "%{$keyword}%")
+                ->where('is_showing', $is_showing);
+        } elseif(!is_null($keyword)) {
+            $query->where('title', 'LIKE', "%{$keyword}%")
                 ->orWhere('description', 'LIKE', "%{$keyword}%");
-        });
-        $query->when(!is_null($is_showing), function($query) use ($is_showing){
-            return $query->where('is_showing', $is_showing);
-        });
-
+        } elseif(!is_null($is_showing)) {
+            $query->where('is_showing', $is_showing);
+        }
+        
         $movies = $query->get();
 
         return view("movies.index", compact(['movies','keyword']));

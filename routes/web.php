@@ -23,13 +23,13 @@ Route::get('/', function () {
     return view('welcome');
 });
 
-// Route::get('URL', [Controllerの名前::class, 'Controller内のfunction名']);
 Route::get('/practice', [PracticeController::class, 'sample']);
 Route::get('/practice2', [PracticeController::class, 'sample2']);
 Route::get('/practice3', [PracticeController::class, 'sample3']);
-
 Route::get('/getPractice', [PracticeController::class, 'getPractice']);
 
+Route::get('/sheets', [SheetController::class, 'index'])->name('sheets.index');
+Route::post('/reservations/store', [ReservationController::class, 'store'])->name('reservations.store');
 
 Route::group([
     'as' => 'movies.',
@@ -46,17 +46,11 @@ Route::group([
     Route::get('/{id}/schedules/{schedule_id}/reservations/create', [ReservationController::class, 'create'])->name('reservations.create');
 });
 
-Route::get('/sheets', [SheetController::class, 'index'])->name('sheets.index');
-
-Route::post('/reservations/store', [ReservationController::class, 'store'])->name('reservations.store');
-
-
-
-
 Route::group([
     'as' => 'admin.',
     'prefix' => 'admin'
 ],function(){
+
     Route::group([
         'as' => 'movies.',
         'prefix' => 'movies'
@@ -78,6 +72,7 @@ Route::group([
         Route::post('{id}/schedules/store', [AdminMovieController::class, 'store_schedule'])->name('schedule.store');
     });
 
+
     Route::group([
         'as' => 'schedules.',
         'prefix' => 'schedules'
@@ -90,6 +85,7 @@ Route::group([
         Route::patch('/{id}/update',[ScheduleController::class, 'update'])->name('update');
         Route::delete('{id}/destroy', [ScheduleController::class, 'destroy'])->name('delete');
     });
+
 
     Route::group([
         'as' => 'reservations.',

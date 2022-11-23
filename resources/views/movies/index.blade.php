@@ -8,7 +8,7 @@
 </head>
 <body>
 <form action={{ route('movies.index') }} method="get">
-    @csrf
+    {{-- @csrf --}}
     <div class="form-group">
         <input type="text" placeholder="検索" name="keyword" value={{ $keyword }}> <br>
 
@@ -20,7 +20,7 @@
         <label for="released">公開中</label> <br>
 
         <button type="submit">検索</button>
-        <input type="hidden" name="_token" value="{{csrf_token()}}">
+        {{-- <input type="hidden" name="_token" value="{{csrf_token()}}"> --}}
     </div>
 </form>
 <ul>
