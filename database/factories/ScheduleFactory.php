@@ -18,7 +18,7 @@ class ScheduleFactory extends Factory
     {
         return [
             'movie_id' => Movie::factory(),
-            'screen_id' => random_int(0, 2),
+            // 'screen_id' => random_int(0, 2),
             'start_time' => CarbonImmutable::now()->addHours(1),
             'end_time' => CarbonImmutable::now()->addHours(3),
         ];

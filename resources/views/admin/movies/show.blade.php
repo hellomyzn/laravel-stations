@@ -10,7 +10,7 @@
 <ul>
 
 <table style="width:100%">
-    <tr>
+    <tr align="left">
       <th>映画タイトル</th>
       <th>画像URL</th>
       <th>公開年</th>
@@ -35,9 +35,14 @@
     </tr>
     
   </table>
-
+  
+  <br>
+  <a href={{route('admin.movies.schedule.create',['id' => $movie->id])}}>スケジュール作成</a>
+  <br>
+  <br>
+  <br>
   <table style="width:100%">
-    <tr>
+    <tr align="left">
       <th>開始時刻</th>
       <th>終了時刻</th>
       <th>機能</th>

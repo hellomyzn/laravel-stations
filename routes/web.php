@@ -8,6 +8,7 @@ use App\Http\Controllers\ScheduleController;
 use App\Http\Controllers\ReservationController;
 use App\Http\Controllers\admin\MovieController as AdminMovieController;
 use App\Http\Controllers\admin\ReservationController as AdminReservationController;
+use App\Http\Controllers\admin\ScheduleController as AdminScheduleController;
 /*
 |-------------------------------------------------------------------------
 | Web Routes
@@ -46,6 +47,7 @@ Route::group([
     Route::get('/{id}/schedules/{schedule_id}/reservations/create', [ReservationController::class, 'create'])->name('reservations.create');
 });
 
+
 Route::group([
     'as' => 'admin.',
     'prefix' => 'admin'
@@ -68,8 +70,8 @@ Route::group([
         Route::patch('{id}/update',[AdminMovieController::class, 'update'])->name('update');
         Route::delete('{id}/destroy', [AdminMovieController::class, 'destroy'])->name('delete');
 
-        Route::get('{id}/schedules/create', [AdminMovieController::class, 'create_schedule'])->name('schedule.create');
-        Route::post('{id}/schedules/store', [AdminMovieController::class, 'store_schedule'])->name('schedule.store');
+        Route::get('{id}/schedules/create', [AdminScheduleController::class, 'create'])->name('schedule.create');
+        Route::post('{id}/schedules/store', [AdminScheduleController::class, 'store'])->name('schedule.store');
     });
 
 

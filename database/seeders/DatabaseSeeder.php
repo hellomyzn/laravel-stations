@@ -7,6 +7,7 @@ use App\Models\Movie;
 use App\Models\Schedule;
 use App\Models\Reservation;
 use App\Models\Screen;
+use App\Models\ScreenSchedule;
 use Database\Seeders\SheetTableSeeder;
 use Illuminate\Database\Seeder;
 
@@ -24,6 +25,7 @@ class DatabaseSeeder extends Seeder
         Movie::factory(10)->create();
         Schedule::factory(30)->create();
         Screen::factory(3)->create();
+        ScreenSchedule::factory(10)->create();
         $this->call([
             SheetTableSeeder::class
         ]);

@@ -13,8 +13,11 @@ return new class extends Migration
      */
     public function up()
     {
-        Schema::table('schedules', function (Blueprint $table) {
-            $table->integer('screen_id')->after('movie_id');
+        Schema::create('screen_schedules', function (Blueprint $table) {
+            $table->id();
+            $table->foreignId('schedule_id')->constrained('schedules')->cascadeOnDelete()->nullable();
+            $table->foreignId('screen_id')->constrained('screens')->cascadeOnDelete()->nullable();
+            $table->timestamps();
         });
     }
 
@@ -25,8 +28,6 @@ return new class extends Migration
      */
     public function down()
     {
-        Schema::table('schedules', function (Blueprint $table) {
-            $table->dropColumn('screen_id');
-        });
+        Schema::dropIfExists('screen_schedules');
     }
 };

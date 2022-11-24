@@ -10,7 +10,7 @@
 <ul>
 
 <table style="width:100%">
-    <tr>
+    <tr align="left">
       <th>映画タイトル</th>
       <th>画像URL</th>
       <th>公開年</th>
@@ -35,20 +35,25 @@
     </tr>
     
     </table>
+    <br>
+    <br>
+    <br>
+    <br>
     <form action={{ route('admin.movies.schedule.store', ['id' => $movie->id]) }} method="post">
         @csrf
         <div class="form-group">
             <label for="start_time_date">開始日:</label><br>
-            <input type="date" id="start_time_date" name="start_time_date"><br>
+            <input type="date" id="start_time_date" name="start_time_date"><br><br>
 
             <label for="start_time_time">開始時間:</label><br>
-            <input type="time" id="start_time_time" name="start_time_time"><br>
+            <input type="time" id="start_time_time" name="start_time_time"><br><br>
 
             <label for="end_time_date">終了日:</label><br>
-            <input type="date" id="end_time_date" name="end_time_date"><br>
+            <input type="date" id="end_time_date" name="end_time_date"><br><br>
 
             <label for="end_time_time">終了時間:</label><br>
-            <input type="time" id="end_time_time" name="end_time_time"><br>
+            <input type="time" id="end_time_time" name="end_time_time"><br><br>
+          
 
             @if (count($errors) > 0)
             <div>
@@ -67,9 +72,13 @@
         </div>
     </form>
 
+  <br>
+  <br>
+  <br>
+  <br>
 
   <table style="width:100%">
-    <tr>
+    <tr align="left">
       <th>開始時刻</th>
       <th>終了時刻</th>
       <th>機能</th>

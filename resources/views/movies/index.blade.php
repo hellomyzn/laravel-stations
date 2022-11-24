@@ -23,7 +23,7 @@
         {{-- <input type="hidden" name="_token" value="{{csrf_token()}}"> --}}
     </div>
 </form>
-<ul>
+
 @foreach ($movies as $movie)
 <li>タイトル: {{ $movie->title }}</li>
 <li>画像: {{ $movie->image_url }}</li>

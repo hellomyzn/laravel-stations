@@ -26,7 +26,7 @@ class Schedule extends Model
         return $this->hasMany(Reservation::class);
     }
 
-    public function screen(){
-        return $this->belongsTo(Screen::class);
-    }
+    // public function screen(){
+    //     return $this->belongsTo(Screen::class);
+    // }
 }

@@ -7,6 +7,7 @@ use App\Http\Requests\Admin\MovieCreateRequest;
 use App\Http\Requests\Admin\ScheduleRequest;
 use App\Models\Movie;
 use App\Models\Schedule;
+use App\Models\Screen;
 use Illuminate\Http\Request;
 
 class MovieController extends Controller
@@ -66,20 +67,5 @@ class MovieController extends Controller
         $movie = Movie::findOrFail($id);
         $movie->delete();
         return redirect()->route('admin.movies.index');
-    }
-
-    public function create_schedule($id){
-        $movie = Movie::findOrFail($id);
-        $schedules = $movie->schedules;
-        return view('admin.schedules.create', compact(['movie', 'schedules']));
-    }
-    public function store_schedule(ScheduleRequest $request, $id){
-        
-        $schedule = new Schedule();
-        $schedule->movie_id = $id;
-        $schedule->start_time = $request->input('start_time_date') . " " . $request->input('start_time_time');
-        $schedule->end_time = $request->input('end_time_date') . " " . $request->input('end_time_time');
-        $schedule->save();
-        return redirect()->route('admin.movies.schedule.create', ['id' => $id]);
     }
 }
