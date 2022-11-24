@@ -95,7 +95,5 @@ class ScheduleController extends Controller
         return redirect()->route('admin.movies.schedule.create', ['id' => $id]);
     }
 
-    public function create_screen_schedule(){
-        return view('admin.schedules.create.screen_schedule');
-    }
+
 }

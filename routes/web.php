@@ -9,6 +9,7 @@ use App\Http\Controllers\ReservationController;
 use App\Http\Controllers\admin\MovieController as AdminMovieController;
 use App\Http\Controllers\admin\ReservationController as AdminReservationController;
 use App\Http\Controllers\admin\ScheduleController as AdminScheduleController;
+use App\Http\Controllers\admin\ScreenScheduleController as AdminScreenScheduleController;
 /*
 |-------------------------------------------------------------------------
 | Web Routes
@@ -86,8 +87,8 @@ Route::group([
         Route::get('/{id}/edit', [ScheduleController::class, 'edit'])->name('edit');
         Route::patch('/{id}/update',[ScheduleController::class, 'update'])->name('update');
         Route::delete('{id}/destroy', [ScheduleController::class, 'destroy'])->name('delete');
-        Route::get('/{id}', [AdminScheduleController::class, 'create_screen_schedule'])->name('create.screen_schedule');
-        Route::post('store', [AdminScheduleController::class, 'store_screen_schedule'])->name('store.screen_schedule');
+        Route::get('/{id}/screen_schedule/create', [AdminScreenScheduleController::class, 'create'])->name('screen_schedule.create');
+        Route::post('{id}/screen_schedule/', [AdminScreenScheduleController::class, 'store'])->name('screen_schedule.store');
     });
 
 

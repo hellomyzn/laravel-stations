@@ -37,7 +37,7 @@
   </table>
   
   <br>
-  <a href={{route('admin.movies.schedule.create',['id' => $movie->id])}}>スケジュール作成</a>
+  
   <br>
   <br>
   <br>
@@ -46,33 +46,47 @@
       <th>開始時刻</th>
       <th>終了時刻</th>
       <th>スクリーン</th>
-      <th>機能</th>
     </tr>
     {{-- {{ dd($movie->schedules) }} --}}
-    @foreach ($schedules as $schedule)
+    
     <tr>
         <td>{{$schedule->start_time}}</td>
         <td>{{$schedule->end_time}}</td>
         <td>
           @foreach ($schedule->screens as $screen)
               <p>{{$screen->name}} Screen</p>
-          @endforeach
-        </td>
-        <td>
-        <form action={{route('admin.schedules.screen_schedule.create', ['id' => $schedule->id])}} method="GET">
-            @csrf
-            <input type="submit" value="スクリーン追加" class="btn btn-danger post_del_btn">
-        </form>
-        <form action={{route('admin.schedules.delete', ['id' => $schedule->id])}} method="POST">
-          @csrf
-          @method('DELETE')
-          <input type="submit" value="削除" class="btn btn-danger post_del_btn">
-      </form>
-        </td>            
+          @endforeach            
     </tr>
-    @endforeach
-    
   </table>
+
+
+  <form action={{ route('admin.schedules.screen_schedule.store', ['id' => $schedule->id]) }} method="post">
+    @csrf
+    <div class="form-group">
+        <label for="screen">スクリーン:</label><br>
+          <select name="screen_id">
+            @foreach ($diff_screens as $screen)
+              <option value={{ $screen->id }}>{{ $screen->name }}</option>                    
+            @endforeach
+          </select>
+          <br><br>
+
+        @if (count($errors) > 0)
+        <div>
+            <ul>
+                @foreach ($errors->all() as $error )
+                    <li>{{ $error }}</li>
+                @endforeach
+            </ul>
+        </div>
+        @endif
+        <div class="text-center mt-3">
+            <input class="btn btn-primary" type="submit" value="追加する">
+            <input type="hidden" name="_token" value="{{csrf_token()}}">
+            <input type="hidden" name="movie_id" value={{$movie->id}}>
+        </div>
+    </div>
+</form>
 
 </ul>
 </body>
