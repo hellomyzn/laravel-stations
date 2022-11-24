@@ -25,7 +25,8 @@
 </form>
 
 @foreach ($movies as $movie)
-<li>タイトル: {{ $movie->title }}</li>
+<li>タイトル: <a href={{ route('movies.show',['id' => $movie->id])}}>{{ $movie->title }}</a></li>
+    
 <li>画像: {{ $movie->image_url }}</li>
 @endforeach
 </ul>

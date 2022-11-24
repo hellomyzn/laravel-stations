@@ -22,7 +22,7 @@ class ReservationFactory extends Factory
     {
         return [
             'schedule_id' => Schedule::factory(),
-            'sheet_id' => random_int(1, 14),
+            'screen_schedule_id' => random_int(1, 10),
             'name' => '予約者氏名',
             'email' => "techbowl@techbowl.com",
             'screening_date' => CarbonImmutable::now()->format('Y-m-d'),
