@@ -53,7 +53,14 @@
 
             <label for="end_time_time">終了時間:</label><br>
             <input type="time" id="end_time_time" name="end_time_time"><br><br>
-          
+            
+            <label for="screen">スクリーン:</label><br>
+              <select name="screen_id">
+                @foreach ($screens as $screen)
+                  <option value={{ $screen->id }}>{{ $screen->name }}</option>                    
+                @endforeach
+              </select>
+              <br><br>
 
             @if (count($errors) > 0)
             <div>

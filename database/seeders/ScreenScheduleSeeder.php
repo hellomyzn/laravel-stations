@@ -30,7 +30,7 @@ class ScreenScheduleSeeder extends Seeder
         ];
 
         foreach ($seeds as $seed) {
-            DB::table('screen_schedule')->insert($seed);
+            DB::table('screen_schedules')->insert($seed);
         }
     }
 }

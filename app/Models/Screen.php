@@ -12,7 +12,7 @@ class Screen extends Model
     
     public function schedules(){
         return $this->belongsToMany(Schedule::class,
-                                    'screen_schedule',
+                                    'screen_schedules',
                                     'screen_id',
                                     'schedule_id');
     }

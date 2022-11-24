@@ -8,6 +8,7 @@ use App\Http\Requests\Admin\ScheduleRequest;
 use App\Models\Movie;
 use App\Models\Schedule;
 use App\Models\Screen;
+use App\Models\ScreenSchedule;
 use Illuminate\Http\Request;
 
 class ScheduleController extends Controller
@@ -73,6 +74,10 @@ class ScheduleController extends Controller
         $movie = Movie::findOrFail($id);
         $schedules = $movie->schedules;
         $screens = Screen::all();
+        // $screens = Screen::query()->where();
+        // $screens = $schedules[2];
+        // dd($screens);
+        
         return view('admin.schedules.create', compact(['movie', 'schedules', 'screens']));
     }
     public function store(ScheduleRequest $request, $id){
@@ -82,6 +87,15 @@ class ScheduleController extends Controller
         $schedule->start_time = $request->input('start_time_date') . " " . $request->input('start_time_time');
         $schedule->end_time = $request->input('end_time_date') . " " . $request->input('end_time_time');
         $schedule->save();
+
+        $screen_schedule = new ScreenSchedule();
+        $screen_schedule->screen_id = $request->input('screen_id');
+        $screen_schedule->schedule_id =  $schedule->id;
+        $screen_schedule->save();
         return redirect()->route('admin.movies.schedule.create', ['id' => $id]);
+    }
+
+    public function create_screen_schedule(){
+        return view('admin.schedules.create.screen_schedule');
     }
 }

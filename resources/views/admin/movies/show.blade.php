@@ -45,6 +45,7 @@
     <tr align="left">
       <th>開始時刻</th>
       <th>終了時刻</th>
+      <th>スクリーン</th>
       <th>機能</th>
     </tr>
     {{-- {{ dd($movie->schedules) }} --}}
@@ -53,11 +54,20 @@
         <td>{{$schedule->start_time}}</td>
         <td>{{$schedule->end_time}}</td>
         <td>
-        <form action={{route('admin.schedules.delete', ['id' => $schedule->id])}} method="POST">
+          @foreach ($schedule->screens as $screen)
+              <p>{{$screen->name}} Screen</p>
+          @endforeach
+        </td>
+        <td>
+        <form action={{route('admin.schedules.create.screen_schedule', ['id' => $schedule->id])}} method="POST">
             @csrf
-            @method('DELETE')
-            <input type="submit" value="削除" class="btn btn-danger post_del_btn">
+            <input type="submit" value="スクリーン追加" class="btn btn-danger post_del_btn">
         </form>
+        <form action={{route('admin.schedules.delete', ['id' => $schedule->id])}} method="POST">
+          @csrf
+          @method('DELETE')
+          <input type="submit" value="削除" class="btn btn-danger post_del_btn">
+      </form>
         </td>            
     </tr>
     @endforeach

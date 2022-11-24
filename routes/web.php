@@ -86,6 +86,8 @@ Route::group([
         Route::get('/{id}/edit', [ScheduleController::class, 'edit'])->name('edit');
         Route::patch('/{id}/update',[ScheduleController::class, 'update'])->name('update');
         Route::delete('{id}/destroy', [ScheduleController::class, 'destroy'])->name('delete');
+        Route::get('/{id}', [AdminScheduleController::class, 'create_screen_schedule'])->name('create.screen_schedule');
+        Route::post('store', [AdminScheduleController::class, 'store_screen_schedule'])->name('store.screen_schedule');
     });
 
 
