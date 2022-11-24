@@ -10,7 +10,10 @@ class Screen extends Model
 {
     use HasFactory;
     
-    // public function schedules(){
-    //     return $this->hasMany(Schedule::class);
-    // }
+    public function schedules(){
+        return $this->belongsToMany(Schedule::class,
+                                    'screen_schedule',
+                                    'screen_id',
+                                    'schedule_id');
+    }
 }

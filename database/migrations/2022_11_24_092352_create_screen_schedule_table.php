@@ -13,10 +13,10 @@ return new class extends Migration
      */
     public function up()
     {
-        Schema::create('screen_schedules', function (Blueprint $table) {
+        Schema::create('screen_schedule', function (Blueprint $table) {
             $table->id();
-            $table->foreignId('schedule_id')->constrained('schedules')->cascadeOnDelete()->nullable();
-            $table->foreignId('screen_id')->constrained('screens')->cascadeOnDelete()->nullable();
+            $table->foreignId('screen_id')->constrained('screens')->cascadeOnDelete();
+            $table->foreignId('schedule_id')->constrained('schedules')->cascadeOnDelete();
             $table->timestamps();
         });
     }
@@ -28,6 +28,6 @@ return new class extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('screen_schedules');
+        Schema::dropIfExists('screen_schedule');
     }
 };
