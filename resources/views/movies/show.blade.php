@@ -73,6 +73,11 @@
   </div> 
   @endif
 
+  <form action={{route('logout')}} method="POST">
+    @csrf
+    <input type="submit" value="ログアウト" class="btn btn-danger post_del_btn"> 
+    
+  </form>
 </ul>
 </body>
 </html>
