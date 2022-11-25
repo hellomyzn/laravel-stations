@@ -6,6 +6,7 @@ use Illuminate\Database\Eloquent\Factories\Factory;
 use App\Models\Movie;
 use App\Models\Schedule;
 use App\Models\Sheet;
+use App\Models\User;
 use Carbon\CarbonImmutable;
 
 /**
@@ -24,8 +25,7 @@ class ReservationFactory extends Factory
             // 'schedule_id' => Schedule::factory(),
             'screen_schedule_id' => random_int(1, 10),
             'sheet_id' => random_int(1, 14),
-            'name' => '予約者氏名',
-            'email' => "techbowl@techbowl.com",
+            'user_id' => random_int(1, 10),
             'screening_date' => CarbonImmutable::now()->format('Y-m-d'),
         ];
     }

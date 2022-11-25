@@ -18,12 +18,13 @@
         "laravelcollective/html": "^6.3"
     },
     "require-dev": {
-        "fakerphp/faker": "^1.19",
         "laravel/breeze": "*",
         "mockery/mockery": "^1.5",
         "nunomaduro/collision": "^6.0",
         "phpunit/phpunit": "^9.5",
-        "spatie/laravel-ignition": "^1.0"
+        "spatie/laravel-ignition": "^1.0",
+        "fakerphp/faker": "^1.9.1"
+
     },
     "autoload": {
         "psr-4": {

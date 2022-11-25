@@ -12,12 +12,6 @@
 
         <label for="sheet_id">座席 ID:</label><br>
         <input type="number" id="sheet_id" name="sheet_id" min="0" max="{{ count($sheets)}}"><br>
-        
-        <label for="name">予約者氏名:</label><br>
-        <input type="text" id="name" name="name"><br>
-
-        <label for="name">メールアドレス:</label><br>
-        <input type="email" id="email" name="email"><br>
 
         @if (count($errors) > 0)
         <div>

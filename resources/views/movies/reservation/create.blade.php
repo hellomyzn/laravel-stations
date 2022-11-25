@@ -8,12 +8,6 @@
         <p>座席: {{ $sheet->row ."-". $sheet->column  }}</p>
 
         <p>日付: {{ $screening_date }}</p>
-        
-        <label for="name">予約者氏名:</label><br>
-        <input type="text" id="name" name="name"><br>
-
-        <label for="name">メールアドレス:</label><br>
-        <input type="email" id="email" name="email"><br>
 
         @if (count($errors) > 0)
         <div>
