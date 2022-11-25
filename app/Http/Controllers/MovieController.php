@@ -5,6 +5,8 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Models\Movie;
 use App\Models\Sheet;
+use App\Models\Screen;
+use App\Models\ScreenSchedule;
 
 class MovieController extends Controller
 {
@@ -44,10 +46,12 @@ class MovieController extends Controller
         if(is_null($request->screening_date)){
             return abort(400, "Exception message");
         }
-        
         $screening_date = $request->screening_date;
         $sheets = Sheet::all();
+        $screen_schedules = ScreenSchedule::where('schedule_id', '=', $schedule_id)->get();
 
+        // dd(count($sheets[0]->reservations));
+        // dd($screen_schedules[1]->reservations);
         return view('movies.show_sheets', compact(['id', 'schedule_id', 'screening_date', 'sheets']));
     }
 }

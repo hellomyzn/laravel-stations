@@ -21,8 +21,9 @@ class ReservationFactory extends Factory
     public function definition()
     {
         return [
-            'schedule_id' => Schedule::factory(),
+            // 'schedule_id' => Schedule::factory(),
             'screen_schedule_id' => random_int(1, 10),
+            'sheet_id' => random_int(1, 14),
             'name' => '予約者氏名',
             'email' => "techbowl@techbowl.com",
             'screening_date' => CarbonImmutable::now()->format('Y-m-d'),

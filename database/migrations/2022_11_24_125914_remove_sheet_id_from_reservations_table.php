@@ -14,7 +14,7 @@ return new class extends Migration
     public function up()
     {
         Schema::table('reservations', function (Blueprint $table) {
-            $table->dropConstrainedForeignId('sheet_id');
+            $table->dropConstrainedForeignId('schedule_id');
         });
     }
 

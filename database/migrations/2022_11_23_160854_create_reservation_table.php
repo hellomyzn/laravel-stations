@@ -22,9 +22,6 @@ return new class extends Migration
             $table->string('name');
             $table->timestamps();
 
-            $table->unique(['schedule_id', 'sheet_id']);
-
-
         });
     }
 

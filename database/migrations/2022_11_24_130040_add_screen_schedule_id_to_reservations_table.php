@@ -14,7 +14,9 @@ return new class extends Migration
     public function up()
     {
         Schema::table('reservations', function (Blueprint $table) {
-            $table->foreignId('screen_schedule_id')->after('schedule_id')->constrained('screen_schedules')->cascadeOnDelete();
+            $table->foreignId('screen_schedule_id')->after('sheet_id')->constrained('screen_schedules')->cascadeOnDelete();
+            
+            $table->unique(['screen_schedule_id', 'sheet_id']);
         });
     }
 
