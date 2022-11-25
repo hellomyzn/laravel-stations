@@ -33,7 +33,7 @@ class ReservationController extends Controller
                 array_push($available_screen_schedules, $screen_schedule->id);
             }
         }
-
+ 
         if(count($available_screen_schedules) == 0){
             return abort(400, "Exception message");
         }
@@ -41,7 +41,8 @@ class ReservationController extends Controller
             'movie',
             'schedule',
             'screening_date',
-            'sheet']));
+            'sheet'
+        ]));
     }
 
     public function store(ReservationRequest $request){

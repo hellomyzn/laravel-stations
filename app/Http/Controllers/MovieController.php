@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use App\Models\Movie;
 use App\Models\Sheet;
 use App\Models\Screen;
+use App\Models\Schedule;
 use App\Models\ScreenSchedule;
 
 class MovieController extends Controller
@@ -48,8 +49,24 @@ class MovieController extends Controller
         }
         $screening_date = $request->screening_date;
         $sheets = Sheet::all();
-        $screen_schedules = ScreenSchedule::where('schedule_id', '=', $schedule_id)->get();
+        $schedule = Schedule::findOrFail($schedule_id);
+        $screen_schedules = $schedule->screen_schedules;
+        $count_screen_schedules = count($screen_schedules);
+        $reservations = $schedule->reservations;
 
-        return view('movies.show_sheets', compact(['id', 'schedule_id', 'screening_date', 'sheets', 'screen_schedules']));
+        $count_sheets_array = array_fill(0, count($sheets), null);
+        for($i = 0; $i < count($sheets); $i++){
+            $count_reservations = count($reservations->where('sheet_id', '=', $sheets[$i]->id));
+            $count_sheets_array[$i] = $count_reservations;
+        }
+
+        return view('movies.show_sheets', compact([
+            'id', 
+            'schedule_id', 
+            'screening_date', 
+            'sheets', 
+            'count_sheets_array',
+            'count_screen_schedules'
+        ]));
     }
 }

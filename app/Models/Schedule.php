@@ -34,4 +34,15 @@ class Schedule extends Model
     public function screen_schedules(){
         return $this->hasMany(ScreenSchedule::class);
     }
+
+    public function reservations(){
+        return $this->hasManyThrough(
+            Reservation::class,
+            ScreenSchedule::class,
+            'schedule_id',
+            'screen_schedule_id',
+            'id',
+            'id'
+        );
+    }
 }
