@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 use App\Http\Requests\ReservationRequest;
 use App\Models\Movie;
 use App\Models\Schedule;
@@ -39,6 +40,7 @@ class ReservationController extends Controller
     }
 
     public function store(ReservationRequest $request){
+        $user = Auth::user();
         $schedule = Schedule::findOrFail($request->schedule_id);
         $movie_id = $schedule->movie->id;
         $sheet_id = $request->sheet_id;
@@ -61,8 +63,9 @@ class ReservationController extends Controller
         $reservation->screening_date = $request->screening_date;
         $reservation->sheet_id = $request->sheet_id;
         $reservation->screen_schedule_id = $available_screen_schedules->random()->id;
-        $reservation->email = $request->input('email');
-        $reservation->name = $request->input('name');
+        $reservation->user_id = $user->id;
+        
+    
 
         try {
             $reservation->save();

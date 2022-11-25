@@ -13,6 +13,9 @@
         <label for="sheet_id">座席 ID:</label><br>
         <input type="number" id="sheet_id" name="sheet_id" min="0" max="{{ count($sheets)}}"><br>
 
+        <label for="user_id">アカウント ID:</label><br>
+        <input type="number" id="user_id" name="user_id" min="0" max="{{ count($users)}}"><br>
+
         @if (count($errors) > 0)
         <div>
             <ul>

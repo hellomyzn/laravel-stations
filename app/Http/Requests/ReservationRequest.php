@@ -24,12 +24,15 @@ class ReservationRequest extends FormRequest
     public function rules()
     {
         return [
-            'name' => 'required',
-            'email' => 'email|required',
             'schedule_id' => 'required',
             'sheet_id' => 'required',
             'screening_date' => 'required'
 
         ];
+    }
+
+    public function userId(): int
+    {
+        return $this->user()->id;
     }
 }

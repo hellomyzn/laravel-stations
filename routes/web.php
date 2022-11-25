@@ -51,7 +51,9 @@ Route::group([
         ]
     ]);
     Route::get('/{id}', [MovieController::class, 'show'])->name('show');
-    Route::get('/{id}/schedules/{schedule_id}/sheets', [MovieController::class, 'show_sheets'])->name('show.sheets');
+    Route::get('/{id}/schedules/{schedule_id}/sheets', [MovieController::class, 'show_sheets'])
+    ->middleware(['auth'])
+    ->name('show.sheets');
     Route::get('/{id}/schedules/{schedule_id}/reservations/create', [ReservationController::class, 'create'])
     ->middleware(['auth'])
     ->name('reservations.create');

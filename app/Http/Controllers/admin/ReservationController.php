@@ -9,18 +9,24 @@ use App\Models\Reservation;
 use App\Models\Movie;
 use App\Models\Sheet;
 use App\Models\Schedule;
+use App\Models\User;
 use Carbon\CarbonImmutable;
 
 
 class ReservationController extends Controller
 {
     public function index(){
+        $now = CarbonImmutable::now()->format('Y-m-d H:m:s');
+        $schedules = Schedule::where('start_time', '>=', $now)->get();
+        $all_reservations = Reservation::all();
+        
+        $reservations = $all_reservations->map(function($item, $key) use($now) {
+            $start_time = $item->screen_schedule->schedule->start_time->format('Y-m-d H:m:s');
+            if ($now < $start_time){ return $item; }
+        });
 
-        $reservations = Reservation::whereHas('schedule', function($query){
-            $now = CarbonImmutable::now()->format('Y-m-d H:m:s');
-            $query->where('start_time', '>=', $now);
-        })->get();
-
+        # remove null
+        $reservations = $reservations->filter();
         return view('admin.reservations.index', compact(['reservations']));
     }
 
@@ -28,11 +34,13 @@ class ReservationController extends Controller
         $movies = Movie::all();
         $sheets = Sheet::all();
         $schedules = Schedule::all();
+        $users = User::all();
 
         return view('admin.reservations.create', compact([
             'movies',
             'sheets',
-            'schedules'
+            'schedules',
+            'users'
         ]));
     }
 
@@ -41,12 +49,7 @@ class ReservationController extends Controller
         $reservation->screening_date = $request->input('screening_date');
         $reservation->schedule_id = $request->input('schedule_id');
         $reservation->sheet_id = $request->input('sheet_id');
-        $reservation->name = $request->input('name');
-        $reservation->email = $request->input('email');
-
-        // if (!is_null(Reservation::where('schedule_id', '=', $reservation->schedule_id)) && !is_null(Reservation::where('sheet_id', '=', $reservation->sheet_id))){
-        //     return abort(400, $e->getMessage());
-        // }
+        $reservation->user_id = $request->input('sheet_id');
 
         try {
             $reservation->save();
