@@ -22,7 +22,8 @@
                 
                 <form action={{route('movies.reservations.create', ['id' => $id, 'schedule_id' => $schedule_id])}} method="GET">
                     @csrf
-                    @if (count($sheets[($i * 5) + $j]->reservations) < 3)
+                    
+                    @if (count($sheets[($i * 5) + $j]->reservations) < count($screen_schedules))
                         <input type="submit" value="{{ $sheets[($i * 5) + $j]->row ."-". $sheets[($i * 5) + $j]->column  }}" class="btn btn-danger post_del_btn">
                     @else        
                         <input type="button" disabled value="{{ $sheets[($i * 5) + $j]->row ."-". $sheets[($i * 5) + $j]->column  }}" class="btn btn-danger post_del_btn">

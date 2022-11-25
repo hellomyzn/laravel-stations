@@ -50,8 +50,6 @@ class MovieController extends Controller
         $sheets = Sheet::all();
         $screen_schedules = ScreenSchedule::where('schedule_id', '=', $schedule_id)->get();
 
-        // dd(count($sheets[0]->reservations));
-        // dd($screen_schedules[1]->reservations);
-        return view('movies.show_sheets', compact(['id', 'schedule_id', 'screening_date', 'sheets']));
+        return view('movies.show_sheets', compact(['id', 'schedule_id', 'screening_date', 'sheets', 'screen_schedules']));
     }
 }

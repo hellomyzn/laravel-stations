@@ -8,6 +8,7 @@ use App\Models\Movie;
 use App\Models\Schedule;
 use App\Models\Sheet;
 use App\Models\Reservation;
+use App\Models\ScreenSchedule;
 
 class ReservationController extends Controller
 {   
@@ -17,12 +18,23 @@ class ReservationController extends Controller
         }
 
         $movie = Movie::findOrFail($id);
-        $schedule = Schedule::findOrFail($schedule_id);
+        
         $screening_date = $request->screening_date;
         $sheet = Sheet::findOrFail($request->sheetId);
+        $schedule = Schedule::findOrFail($schedule_id);
+        $screen_schedules = $schedule->screen_schedules;
+        $available_screen_schedules = array();
         
-        $existed_reservation = Reservation::where('schedule_id', '=', $schedule->id)->where('sheet_id', '=', $sheet->id)->get();
-        if(!is_null($existed_reservation->first())){
+        foreach($screen_schedules as $screen_schedule){
+            $screen_schedule_reservations = $screen_schedule->reservations;
+            $current_reseravation = $screen_schedule_reservations->where('sheet_id', '=', $sheet->id);
+            
+            if(count($current_reseravation) == 0){
+                array_push($available_screen_schedules, $screen_schedule->id);
+            }
+        }
+
+        if(count($available_screen_schedules) == 0){
             return abort(400, "Exception message");
         }
         return view('movies.reservation.create', compact([
@@ -43,7 +55,9 @@ class ReservationController extends Controller
         $schedule = Schedule::findOrFail($request->schedule_id);
         $movie_id = $schedule->movie->id;
 
-
+        # choose randamily
+        $screen_schedule_id = $available_screen_schedules[array_rand($available_screen_schedules)];
+        
 
         try {
             $reservation->save();

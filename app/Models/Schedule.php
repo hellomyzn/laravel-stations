@@ -7,6 +7,7 @@ use Illuminate\Database\Eloquent\Model;
 use App\Models\Movie;
 use App\Models\Reservation;
 use App\Models\Screen;
+use App\Models\ScreenSchedule;
 
 class Schedule extends Model
 {
@@ -28,5 +29,9 @@ class Schedule extends Model
                                     'screen_schedules',
                                     'schedule_id',
                                     'screen_id');
+    }
+
+    public function screen_schedules(){
+        return $this->hasMany(ScreenSchedule::class);
     }
 }
