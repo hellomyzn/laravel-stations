@@ -22,20 +22,13 @@ class ReservationController extends Controller
         $screening_date = $request->screening_date;
         $sheet = Sheet::findOrFail($request->sheetId);
         $schedule = Schedule::findOrFail($schedule_id);
+        $reservations = $schedule->reservations;
         $screen_schedules = $schedule->screen_schedules;
-        $available_screen_schedules = array();
-        
-        foreach($screen_schedules as $screen_schedule){
-            $screen_schedule_reservations = $screen_schedule->reservations;
-            $current_reseravation = $screen_schedule_reservations->where('sheet_id', '=', $sheet->id);
-            
-            if(count($current_reseravation) == 0){
-                array_push($available_screen_schedules, $screen_schedule->id);
-            }
-        }
+        $count_reservations = count($reservations->where('sheet_id', '=', $sheet->id));
+        $count_screen_schedules = count($screen_schedules);
  
-        if(count($available_screen_schedules) == 0){
-            return abort(400, "Exception message");
+        if($count_reservations == $count_screen_schedules){
+            return abort(400, "There is no sheet for the reservation");
         }
         return view('movies.reservation.create', compact([
             'movie',
@@ -46,19 +39,30 @@ class ReservationController extends Controller
     }
 
     public function store(ReservationRequest $request){
-        $reservation = new Reservation();
-        $reservation->screening_date = $request->screening_date;
-        $reservation->schedule_id = $request->schedule_id;
-        $reservation->sheet_id = $request->sheet_id;
-        $reservation->email = $request->input('email');
-        $reservation->name = $request->input('name');
-
         $schedule = Schedule::findOrFail($request->schedule_id);
         $movie_id = $schedule->movie->id;
-
-        # choose randamily
-        $screen_schedule_id = $available_screen_schedules[array_rand($available_screen_schedules)];
+        $sheet_id = $request->sheet_id;
         
+        $reservations = $schedule->reservations->where('sheet_id', '=', $sheet_id);        
+        $screen_schedules = $schedule->screen_schedules;
+
+        $available_screen_schedules = $screen_schedules->map(function($item, $key) use($reservations) {
+            $exist_reservation = count($reservations->where('screen_schedule_id', '=', $item->id));
+            if($exist_reservation){
+                return null;
+            }else{
+                return $item;
+            }
+        });
+        # remove null from collection
+        $available_screen_schedules = $available_screen_schedules->filter();
+        
+        $reservation = new Reservation();
+        $reservation->screening_date = $request->screening_date;
+        $reservation->sheet_id = $request->sheet_id;
+        $reservation->screen_schedule_id = $available_screen_schedules->random()->id;
+        $reservation->email = $request->input('email');
+        $reservation->name = $request->input('name');
 
         try {
             $reservation->save();
