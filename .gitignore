@@ -17,3 +17,5 @@ test-outputs/*.xml
 .exec-once
 .exec-once-yarn
 .techtrain/config.toml
+/public/css
+/public/js

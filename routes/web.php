@@ -25,6 +25,13 @@ Route::get('/', function () {
     return view('welcome');
 });
 
+Route::get('/dashboard', function () {
+    return view('dashboard');
+})->middleware(['auth'])->name('dashboard');
+
+require __DIR__.'/auth.php';
+
+
 Route::get('/practice', [PracticeController::class, 'sample']);
 Route::get('/practice2', [PracticeController::class, 'sample2']);
 Route::get('/practice3', [PracticeController::class, 'sample3']);
@@ -45,7 +52,9 @@ Route::group([
     ]);
     Route::get('/{id}', [MovieController::class, 'show'])->name('show');
     Route::get('/{id}/schedules/{schedule_id}/sheets', [MovieController::class, 'show_sheets'])->name('show.sheets');
-    Route::get('/{id}/schedules/{schedule_id}/reservations/create', [ReservationController::class, 'create'])->name('reservations.create');
+    Route::get('/{id}/schedules/{schedule_id}/reservations/create', [ReservationController::class, 'create'])
+    ->middleware(['auth'])
+    ->name('reservations.create');
 });
 
 
